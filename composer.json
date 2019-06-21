@@ -1,0 +1,19 @@
+{
+    "name": "brice/ipssi-oop-d21.1-php-tp-2019",
+    "description": "Projet meeting",
+    "authors": [
+        {
+            "name": "Brice WILLIAM",
+            "email": "brice.william971@gmail.com"
+        }
+    ],
+    "require": {
+        "php":"^7.2",
+        "monolog/monolog": "^1.24"
+    },
+    "autoload": {
+        "psr-4": {
+            "Ipssi\\":"."
+        }
+    }
+}
