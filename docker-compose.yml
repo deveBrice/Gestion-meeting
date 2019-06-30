@@ -1,29 +1,39 @@
 version: "3.3"
 services:
-  web:
-    build:
-      context: .
-      dockerfile: Dockerfile
-    ports:
-      - "8000:80"
-    volumes:
-      - .:/var/www
-    depends_on:
-      - database
-    environment:
-      - PHPOOP_DB_HOST=database
-      - PHPOOP_DB_NAME=demo
-      - PHPOOP_DB_USER=demo
-      - PHPOOP_DB_PASS=demo
-      - PHPOOP_DB_PORT=3306
   database:
     image: mysql:5.7
+    restart: always
     expose:
       - "3306"
     volumes:
       - ./fixtures/:/docker-entrypoint-initdb.d:ro
     environment:
-      - MYSQL_ROOT_PASSWORD=demo
-      - MYSQL_DATABASE=demo
-      - MYSQL_USER=demo
-      - MYSQL_PASSWORD=demo
+        MYSQL_ROOT_PASSWORD: root
+        MYSQL_DATABASE: Gestion Meetings
+        MYSQL_USER: Brice  
+        MYSQL_PASSWORD: root
+  admin:
+    image: adminer
+    restart: always
+    ports:
+      - "5100:8080"
+    depends_on:
+      - database
+  web:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "8005:80"
+    volumes:
+      - .:/var/www
+    depends_on:
+      - database
+    environment:
+        PHPOOP_DB_HOST: database
+        PHPOOP_DB_NAME: Gestion Meetings
+        PHPOOP_DB_USER: Brice
+        PHPOOP_DB_PASS: root
+        PHPOOP_DB_PORT: 3306
+  
+ 
